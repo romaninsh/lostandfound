@@ -16,11 +16,5 @@ class page_admin extends Page {
 		$tab = $tabs->addTab('Item Admin');
 		$tab->add('CRUD')->setModel('Item');
 
-		$tab = $tabs->addTab('Lost Items');
-		$tab->add('CRUD')->setModel('Item_Lost');
-		
-		$tab = $tabs->addTab('Item Types');
-		$tab->add('CRUD')->setModel('Type');
-		
 	}
 }
