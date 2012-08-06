@@ -19,8 +19,7 @@ class page_register extends Page {
         $form->setModel('User', array('first_name', 'last_name', 'email'));
         $form->addField('password', 'password_1', 'Password');
         $form->addField('password', 'password_2', 'Password');
-        $form->addField('line', 'created', 'Created')->set($date);
-
+        
         // Form submit button
         $form->addSubmit('Register');
 
@@ -40,7 +39,8 @@ class page_register extends Page {
 
                     // Set created date into table
                     // TODO - missing
-                    // update
+        
+                    // Insert into database
                     $form->update();
                     $this->js()->univ()->successMessage('User registered with success')
                             ->execute();
