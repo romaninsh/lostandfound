@@ -10,6 +10,7 @@ class Model_User extends Model_Table {
 		$this->addField('password')->display('password');
 
 		$this->addField('is_admin')->type('boolean');
-		
+
+		$this->hasMany('Item');
 	}
 }
