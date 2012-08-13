@@ -112,6 +112,7 @@ class DB extends AbstractController {
             }
         }
         $statement->execute();
+        $this->hook('query',array($query,$statement,$params));
         return $statement;
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 $config['atk']['base_path']='./atk4/';
-$config['dsn']='mysql://root:root@localhost/example';
+$config['dsn']='mysql://root:root@localhost/lostandfound';
 
 $config['url_postfix']='';
 $config['url_prefix']='?page=';

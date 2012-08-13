@@ -10,7 +10,7 @@ class Frontend extends ApiFrontend {
         $this->add('jUI');
 
         $this->add('Auth')->setModel('User');
-        $this->auth->allowPage(array('register','index'));
+        $this->auth->allowPage(array('register','index','dsql'));
 
         if($this->auth->isLoggedIn()){
             $menu=$this->add('Menu',null,'Menu')
