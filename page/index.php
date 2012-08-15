@@ -6,8 +6,6 @@ class page_index extends Page {
 		if($this->api->auth->isLoggedIn()){
 			$this->add('View_Info')->set('Hello, '.$this->api->auth->model['first_name']);
 		}
-
-		// sample comment
 		
 	}
 }
