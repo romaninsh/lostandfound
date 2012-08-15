@@ -7,6 +7,23 @@ class page_model_details extends Page {
 		
 		$u = $this->add('Model_User')->load($_GET['id']);
 
-		$this->add('CRUD')->setModel($u->ref('Item'));
+		$crud = $this->add('CRUD');
+		$crud->setModel($u->ref('Item'));
+
+
+		if($crud->grid){
+
+			$crud->grid->addColumn('button','found','Mark as Found');
+
+			if($_GET['found']){
+				$crud->model->load($_GET['found']);
+
+				$crud->model->markAsFound();
+
+				$crud->js(null,$crud->grid->js()->reload())
+				->univ()->alert('Success')->execute();
+			}
+		}
+
 	}
 }

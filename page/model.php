@@ -7,11 +7,13 @@ class page_model extends Page {
 
 
 
-/*
+	/* 	
 
 		// Example 1
 
 		$m=$this->add('Model_User');
+
+		$m->addCondition('is_admin',false);
 
 		$name = $m->loadAny() -> get('first_name');
 		echo $name;
@@ -19,7 +21,7 @@ class page_model extends Page {
 		/*  */
 		
 
-		/*
+		/* 
 
 
 		// Example 2
@@ -36,24 +38,26 @@ class page_model extends Page {
 		/*  */
 		
 
-		/*
-
+		/*  
 
 		// Example 3
+		$cnt=0;
+		$this->api->db->addHook('query',function()use(&$cnt){ $cnt++; });
 		$m=$this->add('Model_Item');
+
+		$m->debug();
 
 		foreach($m as $junk){
 			echo $m['title'].
-				' by '.$m->ref('user_id')->get('first_name').
-				' in '.$m->ref('country_id')->get('name').
+				' by '.$m['user'].
+				' in '.$m['country'].
 				'<br/>';
 
 		}
+		var_Dump($cnt);
+		exit;
 
 		/*
-		$cnt=0;
-		$this->api->db->addHook('query',function()use(&$cnt){ $cnt++; });
-		var_Dump($cnt);
 
 		/* */
 
@@ -61,7 +65,7 @@ class page_model extends Page {
 
 
 
-		/*
+		/* 
 		// Example 4
 		$m=$this->add('Model_Item');
 
@@ -69,19 +73,22 @@ class page_model extends Page {
 		$m_user -> addField('first_name');
 		$m_user -> addField('email');
 
-		$m_user = $m->join('country');
-		$m_user -> addField('code');
+		$country = $m->join('country');
+		$country -> addField('code');
 
+
+/*
 		foreach($m as $junk){
 			echo $m['title'].
 				' by '.$m['first_name'].' ('.$m['email'].')'.
 				' in '.$m['country'].' ('.$m['code'].')'.
 				'<br/>';
 		}
+		*/
 
+		//var_Dump($cnt);
 
 		/* */
-
 
 
 
@@ -92,9 +99,14 @@ class page_model extends Page {
 		$m=$this->add('Model_User');
 
 		$m->addExpression('full_name')->set('concat(first_name," ",last_name)');
+		$m->addExpression('items_lost')->set(function($m,$q){
+			return $m->refSQL('Item')->count();
+		});
 
 		$crud=$this->add('CRUD');
 		$crud->setModel($m);
+		
+		if($crud->grid)$crud->grid->addColumn('expander','details');
 
 		/* */
 
@@ -104,7 +116,6 @@ class page_model extends Page {
 
 
 		/* */
-		if($crud->grid)$crud->grid->addColumn('expander','details');
 
 
 
