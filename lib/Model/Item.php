@@ -4,8 +4,10 @@ class Model_Item extends Model_Table {
 	function init(){
 		parent::init();
 		
-		$this->addField('title');
+		$this->addField('title')->mandatory('Need a title');
 		$this->addField('description')->type('text');
+
+		$this->addField('state')->enum(array('lost','found'))->mandatory(true);
 
 		$this->addField('is_found')->type('boolean');
 

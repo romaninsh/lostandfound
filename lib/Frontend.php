@@ -15,7 +15,8 @@ class Frontend extends ApiFrontend {
         if($this->auth->isLoggedIn()){
             $menu=$this->add('Menu',null,'Menu')
             ->addMenuItem('index','Welcome')
-            ->addMenuItem('items/lost','Report a Lost Item');
+            ->addMenuItem('items/list','List')
+            ->addMenuItem('items/report','Report an Item');
 
             $is_admin = $this->api->auth->model['is_admin'];
             if($is_admin){
@@ -25,6 +26,7 @@ class Frontend extends ApiFrontend {
             }
 
             $menu
+            ->addMenuItem('user','User Preferences')
             ->addMenuItem('logout')
             ;
         }else{

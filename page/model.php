@@ -65,7 +65,7 @@ class page_model extends Page {
 
 
 
-		/* 
+		/*  *l/
 		// Example 4
 		$m=$this->add('Model_Item');
 

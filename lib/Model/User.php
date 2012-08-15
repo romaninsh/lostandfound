@@ -8,6 +8,7 @@ class Model_User extends Model_Table {
 		$this->addField('last_name')->mandatory('Enter last name');
 		$this->addField('email')->mandatory('Email is required');
 		$this->addField('password')->display('password');
+		
 		$this->addExpression('full_name')->set('concat(first_name," ",last_name)');
 
 		$this->addField('is_admin')->type('boolean');
