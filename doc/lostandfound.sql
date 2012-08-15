@@ -62,6 +62,7 @@ CREATE TABLE `item` (
   `zip` varchar(16) DEFAULT NULL COMMENT 'postcode',
   `country_id` int(11) DEFAULT NULL COMMENT 'id of country',
   `created` datetime DEFAULT NULL,
+  `is_found` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_item_country` (`country_id`),
   KEY `fk_item_item_type1` (`item_type_id`),
@@ -69,7 +70,7 @@ CREATE TABLE `item` (
   CONSTRAINT `fk_item_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_item_type1` FOREIGN KEY (`item_type_id`) REFERENCES `item_type` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +79,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Blue Umbrella',NULL,4,3,'I think i left it in the Costa Coffee.',NULL,NULL,NULL,NULL,3,NULL),(2,'Car Key',NULL,1,2,'PLEASE return them, my aunt is locked in my ferrari.',NULL,NULL,NULL,NULL,1,NULL),(3,'Wallet with $500 Inside',NULL,4,1,'I am on a holiday in Germany and I\'ve lost my money. Please keep the money but return my driver license.',NULL,NULL,NULL,NULL,88,NULL);
+INSERT INTO `item` VALUES (1,'Blue Umbrella',NULL,4,3,'I think i left it in the Costa Coffee.',NULL,NULL,NULL,NULL,3,NULL,NULL),(2,'Car Key',NULL,1,2,'PLEASE return them, my aunt is locked in my ferrari.',NULL,NULL,NULL,NULL,1,NULL,NULL),(3,'Wallet with $500 Inside',NULL,4,1,'I am on a holiday in Germany and I\'ve lost my money. Please keep the money but return my driver license.',NULL,NULL,NULL,NULL,88,NULL,NULL),(4,'Girlfriend',NULL,2,2,'aoeu',NULL,NULL,NULL,NULL,8,NULL,1);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +124,7 @@ CREATE TABLE `user` (
   `password` varchar(254) DEFAULT NULL COMMENT 'HASH of password',
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-08-15 10:59:41
+-- Dump completed on 2012-08-15 13:30:29
