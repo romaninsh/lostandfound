@@ -10,9 +10,7 @@ class page_admin extends Page {
 
 		$tab = $tabs->addTab('User Admin');
 
-		$user_crud=$tab->add('CRUD');
-		$user_crud->setModel('User');
-		if($user_crud->grid)$user_crud->grid->addClass('zebra bordered');
+		$tab->add('CRUD')->setModel('User');
 
 		$tab = $tabs->addTab('Item Admin');
 		$tab->add('CRUD')->setModel('Item');

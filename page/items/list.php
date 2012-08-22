@@ -1,5 +1,5 @@
 <?php
-class page_items_list extends HelpfulPage {
+class page_items_list extends Page {
 	function init(){
 		parent::init();
 		

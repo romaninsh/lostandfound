@@ -1,6 +1,6 @@
 <?php
 /** Reporting of a lost item */
-class page_items_report extends HelpfulPage {
+class page_items_report extends Page {
 	function init(){
 		parent::init();
 
@@ -10,12 +10,9 @@ class page_items_report extends HelpfulPage {
 		$m->set('user_id',$this->api->auth->model->id);
 
 		$form=$this->add('Form');
-		$form->addClass('wideform');
 		$form->setModel($m,array('state','title','description','item_type_id','country_id'));
 
 		$form->addSubmit('Report a Lost Item');
-
-		$form->addButton('Reset')->js('click', $form->js()->reload());
 		
 	}
 }
