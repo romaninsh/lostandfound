@@ -12,6 +12,11 @@ class Frontend extends ApiFrontend {
         $this->add('Auth')->setModel('User');
         $this->auth->allowPage(array('register','index','dsql'));
 
+
+        //$this->template->setHTML('mytag','<b>bold</b>');
+
+        //$this->add('HelloWorld',null,'mytag');
+
         if($this->auth->isLoggedIn()){
             $menu=$this->add('Menu',null,'Menu')
             ->addMenuItem('index','Welcome')
