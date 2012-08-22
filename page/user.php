@@ -6,7 +6,7 @@ class page_user extends Page {
 		$form = $this->add('Form');
 
 		$form->setModel($this->api->auth->model,
-			array('first_name','last_name','email','password'));
+			array('first_name','last_name','email','password','filestore_file_id'));
 
 		$form->addField('password','password_confirm');
 
