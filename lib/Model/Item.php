@@ -16,6 +16,10 @@ class Model_Item extends Model_Table {
 		$this->hasOne('Country');
 
 		$this->hasMany('Item_Flag');
+
+		$this->addField('is_deleted')->type('boolean');
+
+		$this->addCondition('is_deleted',0);
 	}
 
 	function markAsFound(){
@@ -32,5 +36,23 @@ class Model_Item extends Model_Table {
 
 		$m->save();
 
+	}
+    function delete($id=null){
+        if($id)$this->load($id);
+
+		$this['is_deleted']=1;
+		return $this->saveAndUnload();
+	}
+    function deleteAll(){
+
+        $delete=$this->dsql();
+        $delete->owner->beginTransaction();
+        $this->hook('beforeDeleteAll',array($delete));
+        $delete->set('is_deleted',1)->update();
+        $this->hook('afterDeleteAll');
+        $delete->owner->commit();
+        $this->reset();
+
+        return $this;
 	}
 }

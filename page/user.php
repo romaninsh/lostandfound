@@ -3,14 +3,45 @@ class page_user extends Page {
 	function init(){
 		parent::init();
 
-		$form = $this->add('Form');
+
+		$this->api->addLocation('atk4-addons',array(
+				'php'=>'misc/lib'
+			));
+
+		$c=$this->add('Columns');
+		$left_column =$c->addColumn(6);
+
+		$form = $left_column->add('Form');
+
+		$form->addClass('stacked');
 
 		$form->setModel($this->api->auth->model,
-			array('first_name','last_name','email','password','filestore_file_id'));
-
-		$form->addField('password','password_confirm');
+			array('first_name','last_name','email'));
 
 		$form->addSubmit();
+
+		if($form->isSubmitted()){
+			$form->update();
+			$form->js()->univ()->successMessage('Saved')->execute();
+		}
+
+
+
+		$right_column=$c->addColumn(6);
+
+		$form = $right_column->add('Form');
+
+		$form->setModel($this->api->auth->model,
+			array('password'));
+
+
+		$form->getElement('password')->add('StrengthChecker',null,'after_field');
+
+
+		$form->addField('password','password_confirm');
+		$form->addSubmit('Change Password');
+
+		$form->addClass('stacked');
 
 		if($form->isSubmitted()){
 			if($form->get('password') != $form->get('password_confirm')){
@@ -19,22 +50,8 @@ class page_user extends Page {
 
 
 			$form->update();
-			$form->js()->univ()->successMessage('Saved')->execute();
+			$form->js()->univ()->successMessage('Password Changed')->execute();
 		}
-		/*
-		// alternatitve implementation
-		$form->onSubmit(function($form){
-			if($form->get('password') != $form->get('password_confirm')){
-				throw $form->exception('Password missmatch','ValidityCheck')
-					->setField('password');
-			}
-
-
-			$form->update();
-			$form->js()->univ()->successMessage('Saved')->execute();
-		});
-		*/
-
 		
 	}
 }

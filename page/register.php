@@ -16,10 +16,12 @@ class page_register extends Page {
         $model = $this->add('Model_User');
 
         // Form fields from the table user 
-        $form->setModel('User', array('first_name', 'last_name', 'email'));
+        $form->setModel($model, array('first_name', 'last_name', 'email'));
         $form->addField('password', 'password_1', 'Password');
         $form->addField('password', 'password_2', 'Password');
-        
+
+        $this->api->auth->addEncryptionHook($model);
+
         // Form submit button
         $form->addSubmit('Register');
 
@@ -39,6 +41,7 @@ class page_register extends Page {
 
                     // Set created date into table
                     // TODO - missing
+                    $model->debug();
         
                     // Insert into database
                     $form->update();

@@ -9,7 +9,11 @@ class Frontend extends ApiFrontend {
         $this->requires('atk','4.2.0');
         $this->add('jUI');
 
-        $this->add('Auth')->setModel('User');
+        $this->add('Auth')
+            ->usePasswordEncryption(function($password,$salt){
+                return $password.$salt;
+            })
+            ->setModel('User');
         $this->auth->allowPage(array('register','index','dsql'));
 
 
@@ -44,5 +48,11 @@ class Frontend extends ApiFrontend {
         $this->auth->check();
 
 
+    }
+    function caughtException($e){
+        if($e instanceof Exception_ValidityCheck)
+            $this->js()->univ()->alert($e->getMessage())->execute();
+
+        return parent::caughtException($e);
     }
 }
