@@ -16,6 +16,10 @@ class Frontend extends ApiFrontend {
             ->setModel('User');
         $this->auth->allowPage(array('register','index','dsql'));
 
+        $this->pathfinder->addLocation('.',array(
+            'addons'=>'my-addons'
+            ));
+
 
         //$this->template->setHTML('mytag','<b>bold</b>');
 

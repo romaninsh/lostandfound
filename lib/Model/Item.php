@@ -13,7 +13,7 @@ class Model_Item extends Model_Table {
 
 		$this->hasOne('User',null,'full_name');
 		$this->hasOne('Type');
-		$this->hasOne('Country');
+		$this->hasOne('Country')->display(array('form'=>'autocomplete/basic'));
 
 		$this->hasMany('Item_Flag');
 
