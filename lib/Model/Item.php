@@ -19,6 +19,14 @@ class Model_Item extends Model_Table {
 
 		$this->addField('is_deleted')->type('boolean');
 
+		$this->add('filestore/Field_File','image_id');
+		$this->addExpression('img_url')->set(function($m,$q){
+			return $m->refSQL('image_id')->fieldQuery('url');
+
+		});
+		//$this->current_row['img_url'] = $this->model->ref('image_id')->get('url');
+
+
 		$this->addCondition('is_deleted',0);
 	}
 

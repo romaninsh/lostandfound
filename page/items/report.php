@@ -11,9 +11,10 @@ class page_items_report extends HelpfulPage {
 
 		$form=$this->add('Form');
 		$form->addClass('wideform');
-		$form->setModel($m,array(/* 'state','title',*/'description','item_type_id','country_id'));
+		$form->setModel($m,array(/* 'state','title',*/'description','item_type_id','country_id','image_id'));
 
 		$form->getElement('item_type_id')->destroy();
+		$form->getElement('image_id')->setNotNull();
 
 		$ff= $form->addField('autocomplete/basic','item_type_id')->setModel('Type');
 
@@ -24,12 +25,13 @@ class page_items_report extends HelpfulPage {
 		$form->addButton('Reset')->js('click', $form->js()->reload());
 
 		if($form->isSubmitted()){
+			if(!$form->get('image_id'))$form->displayError('image_id','Select file');
 
 			//$form->model['item_type_id']=
 
 			//$form->update();
 
-			$form->js()->univ()->successMessage($form->get('item_type'))->execute();
+			$form->js()->univ()->successMessage($form->get('image_id'))->execute();
 		}
 		
 	}

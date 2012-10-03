@@ -6,6 +6,8 @@ $config['dsn']='mysql://root:root@localhost/lostandfound';
 $config['url_postfix']='';
 $config['url_prefix']='?page=';
 
+$config["frontend"]["token"]='secrettoken';
+
 # Agile Toolkit attempts to use as many default values for config file,
 # and you only need to add them here if you wish to re-define default
 # values. For more options look at:

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.25, for osx10.6 (i386)
+-- MySQL dump 10.13  Distrib 5.5.27, for osx10.6 (i386)
 --
 -- Host: localhost    Database: lostandfound
 -- ------------------------------------------------------
--- Server version	5.5.25-log
+-- Server version	5.5.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,193 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cms_component`
+--
+
+DROP TABLE IF EXISTS `cms_component`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_component` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `cms_componenttype_id` int(11) DEFAULT NULL,
+  `config` text,
+  `is_enabled` enum('Y','N') DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_component`
+--
+
+LOCK TABLES `cms_component` WRITE;
+/*!40000 ALTER TABLE `cms_component` DISABLE KEYS */;
+INSERT INTO `cms_component` VALUES (1,'Welcome',1,'YToxOntzOjQ6InRleHQiO3M6NTQ6InNhb3RlaHVzYW9odQ0KYW9ldSBzYW90bmV1aCBzbm9lDQp1YW8NCmV1DQoNCg0KPGI+dGVzdCI7fQ==','Y'),(2,'Test2',1,'YToxOntzOjQ6InRleHQiO3M6OToiYW9ldWF1YW91Ijt9','Y'),(3,'Article',3,'YToyOntzOjc6ImNvbnRlbnQiO3M6MTI2OiI8aDE+PGltZyBzcmM9Ii9pbWcvNiI+SGVsbG8gV29ybGQ8L2gxPjxkaXY+YW9ldWFvdWFvZXVhb2V1PC9kaXY+PGRpdj5vYWV1PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj48YnI+PC9kaXY+PGRpdj5vZWF1PC9kaXY+ICAiO3M6NjoiaW1hZ2VzIjtzOjE6IjYiO30=','Y'),(4,'Test',1,'YToxOntzOjQ6InRleHQiO3M6MjU6IldlbGNvbWUgdG8gTG9zdCBhbmQgRk91bmQiO30=','Y'),(5,'test_crud',2,'YTo3OntzOjU6Im1vZGVsIjtzOjQ6Ikl0ZW0iO3M6ODoicGFnaW5hdGUiO3M6MDoiIjtzOjExOiJncmlkX2ZpZWxkcyI7czowOiIiO3M6MTE6ImZvcm1fZmllbGRzIjtzOjA6IiI7czo3OiJjYW5fYWRkIjtpOjE7czo4OiJjYW5fZWRpdCI7aTowO3M6MTA6ImNhbl9kZWxldGUiO2k6MDt9','Y');
+/*!40000 ALTER TABLE `cms_component` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_componenttype`
+--
+
+DROP TABLE IF EXISTS `cms_componenttype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_componenttype` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_componenttype`
+--
+
+LOCK TABLES `cms_componenttype` WRITE;
+/*!40000 ALTER TABLE `cms_componenttype` DISABLE KEYS */;
+INSERT INTO `cms_componenttype` VALUES (1,'Text','cms/Cms_Text'),(2,'CRUD','cms/Cms_CRUD'),(3,'What you see is  what you get','cms/Cms_Html');
+/*!40000 ALTER TABLE `cms_componenttype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_page`
+--
+
+DROP TABLE IF EXISTS `cms_page`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `api_layout` varchar(255) DEFAULT NULL,
+  `page_layout` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_page`
+--
+
+LOCK TABLES `cms_page` WRITE;
+/*!40000 ALTER TABLE `cms_page` DISABLE KEYS */;
+INSERT INTO `cms_page` VALUES (1,'cms/test',NULL,NULL),(2,'index',NULL,NULL);
+/*!40000 ALTER TABLE `cms_page` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_pagecomponent`
+--
+
+DROP TABLE IF EXISTS `cms_pagecomponent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_pagecomponent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cms_page_id` int(11) DEFAULT NULL,
+  `cms_component_id` int(11) DEFAULT NULL,
+  `template_spot` text,
+  `ord` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_pagecomponent`
+--
+
+LOCK TABLES `cms_pagecomponent` WRITE;
+/*!40000 ALTER TABLE `cms_pagecomponent` DISABLE KEYS */;
+INSERT INTO `cms_pagecomponent` VALUES (1,1,1,'Content',NULL),(3,1,3,'Content',NULL),(4,2,4,'Content',NULL),(5,2,5,'Content',NULL);
+/*!40000 ALTER TABLE `cms_pagecomponent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_route`
+--
+
+DROP TABLE IF EXISTS `cms_route`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_route` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rule` text,
+  `target` text,
+  `params` text,
+  `ord` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_route`
+--
+
+LOCK TABLES `cms_route` WRITE;
+/*!40000 ALTER TABLE `cms_route` DISABLE KEYS */;
+INSERT INTO `cms_route` VALUES (1,'(cms\\/.*)','cms','cms_page',NULL);
+/*!40000 ALTER TABLE `cms_route` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cms_tag`
+--
+
+DROP TABLE IF EXISTS `cms_tag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cms_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `value` text,
+  PRIMARY KEY (`id`),
+  KEY `cms_tag_n` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cms_tag`
+--
+
+LOCK TABLES `cms_tag` WRITE;
+/*!40000 ALTER TABLE `cms_tag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cms_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`),
+  KEY `fk_comment_user1` (`user_id`),
+  KEY `fk_comment_item1` (`item_id`),
+  CONSTRAINT `fk_comment_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_comment_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,1,1,'blah blah');
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `country`
@@ -43,6 +230,119 @@ INSERT INTO `country` VALUES (1,'IE','Ireland',1),(2,'UK','United Kingdom',1),(3
 UNLOCK TABLES;
 
 --
+-- Table structure for table `filestore_file`
+--
+
+DROP TABLE IF EXISTS `filestore_file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `filestore_file` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filestore_type_id` int(11) NOT NULL DEFAULT '0',
+  `filestore_volume_id` int(11) NOT NULL DEFAULT '0',
+  `filename` varchar(255) NOT NULL DEFAULT '',
+  `original_filename` varchar(255) DEFAULT NULL,
+  `filesize` int(11) NOT NULL DEFAULT '0',
+  `filenum` int(11) NOT NULL DEFAULT '0',
+  `deleted` enum('Y','N') NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `filestore_file`
+--
+
+LOCK TABLES `filestore_file` WRITE;
+/*!40000 ALTER TABLE `filestore_file` DISABLE KEYS */;
+INSERT INTO `filestore_file` VALUES (1,1,1,'0/fsNDNnLS','bg-hex.png',4167,0,''),(2,1,1,'0/fsJEa33c','bg-hex.png',4167,0,''),(3,1,1,'0/fsKNkzpC','logo.png',3756,0,''),(4,1,1,'0/fsJUCSLg','bg-hex.png',4167,0,''),(5,1,1,'0/fsEUWQSy','thumb_bg-hex.png',0,0,''),(6,1,1,'0/fsKeOzDl','bg-hex.png',4167,0,'');
+/*!40000 ALTER TABLE `filestore_file` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `filestore_image`
+--
+
+DROP TABLE IF EXISTS `filestore_image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `filestore_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `original_file_id` int(11) NOT NULL DEFAULT '0',
+  `thumb_file_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `filestore_image`
+--
+
+LOCK TABLES `filestore_image` WRITE;
+/*!40000 ALTER TABLE `filestore_image` DISABLE KEYS */;
+INSERT INTO `filestore_image` VALUES (1,NULL,6,5);
+/*!40000 ALTER TABLE `filestore_image` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `filestore_type`
+--
+
+DROP TABLE IF EXISTS `filestore_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `filestore_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `mime_type` varchar(64) NOT NULL DEFAULT '',
+  `extension` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `filestore_type`
+--
+
+LOCK TABLES `filestore_type` WRITE;
+/*!40000 ALTER TABLE `filestore_type` DISABLE KEYS */;
+INSERT INTO `filestore_type` VALUES (1,'png','image/png','png'),(2,'jpeg','image/jpeg','jpeg'),(3,'gif','image/gif','gif');
+/*!40000 ALTER TABLE `filestore_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `filestore_volume`
+--
+
+DROP TABLE IF EXISTS `filestore_volume`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `filestore_volume` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `dirname` varchar(255) NOT NULL DEFAULT '',
+  `total_space` bigint(20) NOT NULL DEFAULT '0',
+  `used_space` bigint(20) NOT NULL DEFAULT '0',
+  `stored_files_cnt` int(11) NOT NULL DEFAULT '0',
+  `enabled` enum('Y','N') DEFAULT 'Y',
+  `last_filenum` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `filestore_volume`
+--
+
+LOCK TABLES `filestore_volume` WRITE;
+/*!40000 ALTER TABLE `filestore_volume` DISABLE KEYS */;
+INSERT INTO `filestore_volume` VALUES (1,'upload','upload',1000000000,0,6,'Y',NULL);
+/*!40000 ALTER TABLE `filestore_volume` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `item`
 --
 
@@ -52,7 +352,7 @@ DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of item',
   `title` varchar(64) DEFAULT NULL COMMENT 'for example "red purse", "black belt", "green gucci shoes"',
-  `action` enum('lost','found') DEFAULT NULL,
+  `state` enum('lost','found') DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `item_type_id` int(1) DEFAULT NULL,
   `description` text COMMENT 'detailed description of item',
@@ -63,6 +363,8 @@ CREATE TABLE `item` (
   `country_id` int(11) DEFAULT NULL COMMENT 'id of country',
   `created` datetime DEFAULT NULL,
   `is_found` tinyint(1) DEFAULT NULL,
+  `image_id` int(11) DEFAULT NULL,
+  `is_deleted` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_item_country` (`country_id`),
   KEY `fk_item_item_type1` (`item_type_id`),
@@ -70,7 +372,7 @@ CREATE TABLE `item` (
   CONSTRAINT `fk_item_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_item_type1` FOREIGN KEY (`item_type_id`) REFERENCES `item_type` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_item_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,8 +381,36 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'Blue Umbrella',NULL,4,3,'I think i left it in the Costa Coffee.',NULL,NULL,NULL,NULL,3,NULL,NULL),(2,'Car Key',NULL,1,2,'PLEASE return them, my aunt is locked in my ferrari.',NULL,NULL,NULL,NULL,1,NULL,NULL),(3,'Wallet with $500 Inside',NULL,4,1,'I am on a holiday in Germany and I\'ve lost my money. Please keep the money but return my driver license.',NULL,NULL,NULL,NULL,88,NULL,NULL),(4,'Girlfriend',NULL,2,2,'aoeu',NULL,NULL,NULL,NULL,8,NULL,1);
+INSERT INTO `item` VALUES (1,'Blue Umbrella','lost',4,3,'I think i left it in the Costa Coffee.',NULL,NULL,NULL,NULL,3,NULL,0,2,0),(3,'Wallet with $500 Inside','lost',4,1,'I am on a holiday in Germany and I\'ve lost my money. Please keep the money but return my driver license.',NULL,NULL,NULL,NULL,2,NULL,0,NULL,0),(4,'Girlfriend','found',2,2,'aoeu',NULL,NULL,NULL,NULL,8,NULL,1,NULL,1),(5,'Test Item','lost',1,1,'aoeuaou',NULL,NULL,NULL,NULL,1,NULL,0,NULL,1);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_flag`
+--
+
+DROP TABLE IF EXISTS `item_flag`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_flag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_item_flag_user1` (`user_id`),
+  KEY `fk_item_flag_item1` (`item_id`),
+  CONSTRAINT `fk_item_flag_item1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_item_flag_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_flag`
+--
+
+LOCK TABLES `item_flag` WRITE;
+/*!40000 ALTER TABLE `item_flag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_flag` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -124,7 +454,7 @@ CREATE TABLE `user` (
   `password` varchar(254) DEFAULT NULL COMMENT 'HASH of password',
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +463,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Armin','Hierstetter',NULL,'admin@example.com','admin',NULL),(2,0,'Romans','Malinovskis',NULL,'romans@example.com','romans',NULL),(3,0,'Demo','User',NULL,'demo@mail.com','demo',NULL),(4,0,'Joe','Blogs',NULL,'joe@example.com','joe',NULL);
+INSERT INTO `user` VALUES (1,1,'Armin','Hierstetter',NULL,'admin@example.com','adminadmin@example.com',NULL),(2,0,'Romans','Malinovskis',NULL,'romans@example.com','romans',NULL),(4,0,'Joe','Blogs',NULL,'joe@example.com','joe',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -146,4 +476,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-08-15 13:30:29
+-- Dump completed on 2012-10-03 19:19:49

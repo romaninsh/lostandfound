@@ -9,16 +9,20 @@ class Frontend extends ApiFrontend {
         $this->requires('atk','4.2.0');
         $this->add('jUI');
 
+        $this->pathfinder->addLocation('.',array(
+            'addons'=>array('my-addons','ambient-addons'),
+            ));
+
+        $this->add("cms/Controller_Cms");
+
+
+
         $this->add('Auth')
             ->usePasswordEncryption(function($password,$salt){
                 return $password.$salt;
             })
             ->setModel('User');
         $this->auth->allowPage(array('register','index','dsql'));
-
-        $this->pathfinder->addLocation('.',array(
-            'addons'=>'my-addons'
-            ));
 
 
         //$this->template->setHTML('mytag','<b>bold</b>');
@@ -34,6 +38,8 @@ class Frontend extends ApiFrontend {
             $is_admin = $this->api->auth->model['is_admin'];
             if($is_admin){
                 $menu
+                ->addMenuItem("cmsadmin", "Manage CMS")
+                ->addMenuItem("fileadmin", "Manage Files")
                 ->addMenuItem('admin');
 
             }
