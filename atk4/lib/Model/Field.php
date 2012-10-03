@@ -1,2 +1,0 @@
-<?
-// moved into ../Field.php
