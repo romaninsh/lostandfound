@@ -7,7 +7,7 @@ class Model_User extends Model_Table {
 		$this->addField('first_name')->mandatory('Enter first name');
 		$this->addField('last_name')->mandatory('Enter last name');
 		$this->addField('email')->mandatory('Email is required');
-		$this->addField('password')->display('password')->mandatory('Type your password');
+		$this->addField('password')->display(array('form'=>'password'))->mandatory('Type your password');
 		
 		$this->addExpression('full_name')->set('concat(first_name," ",last_name)');
 
