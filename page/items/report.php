@@ -15,7 +15,7 @@ class page_items_report extends HelpfulPage {
 
 		$form->getElement('item_type_id')->destroy();
 
-		$ff= $form->addField('MyAutocomplete','item_type_id')->setModel('Type');
+		$ff= $form->addField('autocomplete/basic','item_type_id')->setModel('Type');
 
 		//$form->add('Order')->move('item_type','after','title')->now();
 
